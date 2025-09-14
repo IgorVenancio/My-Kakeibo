@@ -30,13 +30,17 @@ erDiagram
     CATEGORY ||--o{ INCOME : classifies
 
     USER {
-        int user_id PK
+        uuid user_id PK
         string name
         string email
         string password_hash
         string password_salt
         string currency_preference
         date created_at
+        date updated_at
+        bool is_active
+        string activation_token
+        date activation_token_expiry
     }
 
     CATEGORY {
@@ -80,14 +84,19 @@ erDiagram
 ```mermaid
 classDiagram
     class User {
-        +int id
+        +uuid id
         +string name
         +string email
         +string passwordHash
         +string passwordSalt
         +string currencyPreference
         +Date createdAt
+        +Date updatedAd
+        +boolean isActive
+        +string activationToken
+        +string activationTokenExpiry
         +register()
+        +activate()
         +login()
         +updateProfile()
         +setCurrencyPreference(currency)
