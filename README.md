@@ -88,15 +88,15 @@ classDiagram
         +string name
         +string email
         +string passwordHash
-        +string passwordSalt
         +string currencyPreference
         +Date createdAt
         +Date updatedAd
         +boolean isActive
         +string activationToken
         +string activationTokenExpiry
-        +register()
-        +activate()
+        +registerUser()
+        +sendAccountActivationMail()
+        +activateUser()
         +login()
         +updateProfile()
         +setCurrencyPreference(currency)

@@ -1,4 +1,4 @@
-package io.github.IgorVenancio.my_kakeibo.entity;
+package io.github.IgorVenancio.my_kakeibo.user.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,6 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
     private String passwordHash;
-    private String passwordSalt;
     private String currencyPreference;
     @Column(updatable = false)
     @CreationTimestamp

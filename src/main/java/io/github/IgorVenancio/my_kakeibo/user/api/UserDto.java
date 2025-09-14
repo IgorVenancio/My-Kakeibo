@@ -1,4 +1,4 @@
-package io.github.IgorVenancio.my_kakeibo.dto;
+package io.github.IgorVenancio.my_kakeibo.user.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,6 @@ public class UserDto {
     private String name;
     private String email;
     private String passwordHash;
-    private String passwordSalt;
     private String currencyPreference;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;

@@ -1,11 +1,9 @@
-package io.github.IgorVenancio.my_kakeibo.extension;
+package io.github.IgorVenancio.my_kakeibo.user.application;
 
-import io.github.IgorVenancio.my_kakeibo.dto.UserDto;
-import io.github.IgorVenancio.my_kakeibo.entity.UserEntity;
+import io.github.IgorVenancio.my_kakeibo.user.api.UserDto;
+import io.github.IgorVenancio.my_kakeibo.user.domain.UserEntity;
 
-import java.time.OffsetDateTime;
-
-public class DtoMapper {
+public class UserMapper {
 
     // Convert from UserDTO to UserEntity
     public static UserEntity toEntity(UserDto userDto) {
@@ -13,7 +11,6 @@ public class DtoMapper {
                 .name(userDto.getName())
                 .email(userDto.getEmail())
                 .passwordHash(userDto.getPasswordHash())
-                .passwordSalt(userDto.getPasswordSalt())
                 .currencyPreference(userDto.getCurrencyPreference());
 
         // Optional fields

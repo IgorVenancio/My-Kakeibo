@@ -1,4 +1,4 @@
-package io.github.IgorVenancio.my_kakeibo.service;
+package io.github.IgorVenancio.my_kakeibo.common.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
