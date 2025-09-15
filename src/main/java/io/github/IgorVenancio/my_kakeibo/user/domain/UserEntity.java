@@ -48,7 +48,7 @@ public class UserEntity {
         updatedAt = OffsetDateTime.now();
         if (activationToken == null) {
             activationToken = UUID.randomUUID().toString();
-            activationTokenExpiry = OffsetDateTime.now().plusHours(12);
+            activationTokenExpiry = OffsetDateTime.now().plusHours(24);
         }
     }
 

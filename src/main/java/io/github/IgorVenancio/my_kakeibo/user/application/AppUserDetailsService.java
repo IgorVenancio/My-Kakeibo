@@ -13,7 +13,7 @@ import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
-public abstract class AppUserDetailsService implements UserDetailsService {
+public class AppUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override

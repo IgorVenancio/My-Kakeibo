@@ -1,5 +1,6 @@
 package io.github.IgorVenancio.my_kakeibo.user.api;
 
+import io.github.IgorVenancio.my_kakeibo.user.application.AuthService;
 import io.github.IgorVenancio.my_kakeibo.user.application.UserService;
 import io.github.IgorVenancio.my_kakeibo.user.domain.ActivationResult;
 import lombok.RequiredArgsConstructor;
@@ -7,11 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto){
@@ -31,5 +35,20 @@ public class UserController {
             case INVALID_TOKEN -> ResponseEntity.badRequest()
                     .body("Invalid activation link.");
         };
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> login(@RequestBody AuthDto authDto) {
+        try {
+            Map<String, Object> response = authService.login(authDto);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "Test successful";
     }
 }

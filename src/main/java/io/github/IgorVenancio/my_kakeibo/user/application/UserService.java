@@ -6,13 +6,13 @@ import io.github.IgorVenancio.my_kakeibo.user.domain.ActivationResult;
 import io.github.IgorVenancio.my_kakeibo.user.domain.UserEntity;
 import io.github.IgorVenancio.my_kakeibo.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.OffsetDateTime;
 
 @Service
@@ -27,7 +27,7 @@ public class UserService {
     public UserDto registerUser(UserDto userDto) {
         // Convert from DTO, insert new entity, and return result as DTO
         UserEntity userEntity = UserMapper.toEntity(userDto);
-        userEntity.setPasswordHash(passwordEncoder.encode(userEntity.getPasswordHash()));
+        userEntity.setPasswordHash(passwordEncoder.encode(userDto.getPasswordHash()));
         userEntity = userRepository.save(userEntity);
 
         // Send email for account activation
@@ -70,31 +70,5 @@ public class UserService {
                     return ActivationResult.SUCCESS;
                 })
                 .orElse(ActivationResult.INVALID_TOKEN);
-    }
-
-    public boolean isAccountActive(String email) {
-        return userRepository.findByEmail(email)
-                .map(UserEntity::isActive)
-                .orElse(false);
-    }
-
-    public UserEntity getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.findByEmail(authentication.getName())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found."));
-    }
-
-    public UserDto getPublicUser(String email) {
-        UserEntity currentUser = null;
-
-        if (email != null) {
-            currentUser = userRepository.findByEmail(email)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found."));
-        } else {
-
-            currentUser = getCurrentUser();
-        }
-
-        return UserMapper.toDto(currentUser);
     }
 }

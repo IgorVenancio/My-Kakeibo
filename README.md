@@ -34,7 +34,6 @@ erDiagram
         string name
         string email
         string password_hash
-        string password_salt
         string currency_preference
         date created_at
         date updated_at
